@@ -66,7 +66,7 @@ public class EchartServers {
         });
         arrayList.sort(Comparator.comparing(Echars1::getCount).reversed());
         ReturnMessage<List> message  = new ReturnMessage<>();
-        message.setChannel(ChannelEnum.ECHARTS1.getValue());
+        message.setChannel(ChannelEnum.ECHARTS2.getValue());
         message.setBody(arrayList);
 
         return message;

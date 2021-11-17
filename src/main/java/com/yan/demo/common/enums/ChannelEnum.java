@@ -12,6 +12,7 @@ import lombok.Data;
 @AllArgsConstructor
 public enum ChannelEnum implements Enum2ArgGeneral<String,String > {
     ECHARTS1("echarts1","第一个图"),
+    ECHARTS2("echarts2","第二个图"),
     DATA("data","原始数据")
     ;
     final String value;
