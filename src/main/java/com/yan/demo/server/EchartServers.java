@@ -46,7 +46,7 @@ public class EchartServers {
         });
         List<Echars1> rearrayList= arrayList.stream().sorted(Comparator.comparing(Echars1::getCount).reversed()).collect(Collectors.toList()).subList(0,CountValueEnum.ECHARTS1_INTERCEPT.getValue());
 
-        ReturnMessage<List> message = new ReturnMessage<>();
+        ReturnMessage<List> message  = new ReturnMessage<>();
         message.setChannel(ChannelEnum.ECHARTS1.getValue());
         message.setBody(rearrayList);
         aLong.addAndGet(10);
