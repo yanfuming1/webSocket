@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -22,15 +23,27 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Repository
 @Slf4j
 public class EchartsDao {
-    static String fileName="disease.csv";
+
+
+
+     static  String fileName;
 
     static List<Disease> diseaseList = new CopyOnWriteArrayList<>();
 
+    public EchartsDao() throws IOException {
+        File directory = new File("");//参数为空
+        String courseFile = directory.getCanonicalPath();//标准的路径 ;
+        String author =directory.getAbsolutePath();//绝对路径;
+        fileName=author+"/src/main/resources/disease.csv";
+    }
+
     @PostConstruct
-    public void getEchartsData(){
+    public void getEchartsData() {
+
+
         Long start=System.currentTimeMillis();
         ArrayList<Disease> diseases = new ArrayList<>();
-        String fileName ="/Users/guanliyuan/Desktop/demo/src/main/java/com/yan/demo/dao/excelDao/disease.csv";
+//        String fileName ="/Users/guanliyuan/Desktop/demo/src/main/java/com/yan/demo/dao/excelDao/disease.csv";
         EasyExcel.read(fileName, Disease.class, new PageReadListener<Disease>(dataList -> {
             diseases.addAll(dataList);
         })).sheet().doRead();

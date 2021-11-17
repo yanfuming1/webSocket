@@ -22,7 +22,7 @@ public class WenData {
                 .connectTimeout(3, TimeUnit.SECONDS)//设置连接超时时间
                 .build();
         //连接地址
-        String url = "ws://127.0.0.1:8080/webSocket";
+        String url = "ws://182.92.72.202:9000/webSocket";
         //构建一个连接请求对象
         Request request = new Request.Builder().get().url(url).build();
 
