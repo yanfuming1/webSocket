@@ -27,27 +27,27 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 @Slf4j
 public class EchartsDao {
 
-    static ReadWriteLock lock=new ReentrantReadWriteLock();
-    static Lock readLock=lock.readLock();
-    static Lock writeLock=lock.writeLock();
+    static ReadWriteLock lock = new ReentrantReadWriteLock();
+    static Lock readLock = lock.readLock();
+    static Lock writeLock = lock.writeLock();
 
 
-     static  String fileName;
+    static String fileName;
 
     static List<Disease> diseaseList = new CopyOnWriteArrayList<>();
 
     public EchartsDao() throws IOException {
         File directory = new File("");//参数为空
         String courseFile = directory.getCanonicalPath();//标准的路径 ;
-        String author =directory.getAbsolutePath();//绝对路径;
-        fileName=author+"/src/main/resources/disease.csv";
+        String author = directory.getAbsolutePath();//绝对路径;
+        fileName = author + "/src/main/resources/disease.csv";
     }
 
     @PostConstruct
-    public void getEchartsData()  {
+    public void getEchartsData() {
 
 
-        Long start=System.currentTimeMillis();
+        Long start = System.currentTimeMillis();
         ArrayList<Disease> diseases = new ArrayList<>();
 //        String fileName ="/Users/guanliyuan/Desktop/demo/src/main/java/com/yan/demo/dao/excelDao/disease.csv";
         EasyExcel.read(fileName, Disease.class, new PageReadListener<Disease>(dataList -> {
@@ -58,28 +58,21 @@ public class EchartsDao {
         /**
          *使用并发集合  不加锁
          */
-      //  writeLock.lock();
+        //  writeLock.lock();
         diseaseList.clear();
-
-//        try {
-//            Thread.sleep(5000);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-
-        diseaseList=diseases;
-     //   writeLock.unlock();
-        log.error("读取CSV-----》耗时{}",System.currentTimeMillis()-start);
+        diseaseList = diseases;
+        //   writeLock.unlock();
+        log.error("读取CSV-----》耗时{}", System.currentTimeMillis() - start);
     }
 
-    public List<Disease> getStaticData(){
-    //    readLock.lock();
-        List<Disease> data=diseaseList;
-     //   readLock.unlock();
+    public List<Disease> getStaticData() {
+        //    readLock.lock();
+        List<Disease> data = diseaseList;
+        //   readLock.unlock();
         return data;
     }
 
-    public List<Disease> setStaticData(){
+    public List<Disease> setStaticData() {
         getEchartsData();
         return getStaticData();
     }

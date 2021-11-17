@@ -16,53 +16,12 @@ import java.util.concurrent.TimeUnit;
  */
 public class WenData {
     public static void main(String[] args) {
-        OkHttpClient mClient = new OkHttpClient.Builder()
-                .readTimeout(3, TimeUnit.SECONDS)//设置读取超时时间
-                .writeTimeout(3, TimeUnit.SECONDS)//设置写的超时时间
-                .connectTimeout(3, TimeUnit.SECONDS)//设置连接超时时间
-                .build();
-        //连接地址
-        String url = "ws://182.92.72.202:9000/webSocket";
-        //构建一个连接请求对象
-        Request request = new Request.Builder().get().url(url).build();
-
-        //开始连接
-        WebSocket websocket = mClient.newWebSocket(request, new WebSocketListener() {
+        Client client = new Client() {
             @Override
-            public void onOpen(WebSocket webSocket, Response response) {
-                super.onOpen(webSocket, response);
-                System.out.println("123");
-                //连接成功...
+            public void handle(String val) {
+                System.out.println(val);
             }
-
-            @Override
-            public void onMessage(WebSocket webSocket, String text) {
-                System.out.println(text);
-                super.onMessage(webSocket, text);
-                //收到消息...（一般是这里处理json）
-            }
-
-            @Override
-            public void onMessage(WebSocket webSocket, ByteString bytes) {
-                super.onMessage(webSocket, bytes);
-                //收到消息...（一般很少这种消息）
-            }
-
-            @Override
-            public void onClosed(WebSocket webSocket, int code, String reason) {
-                super.onClosed(webSocket, code, reason);
-                //连接关闭...
-            }
-
-            @Override
-            public void onFailure(WebSocket webSocket, Throwable throwable, Response response) {
-                super.onFailure(webSocket, throwable, response);
-                //连接失败...
-                System.out.println("123--");
-
-            }
-
-        });
+        };
         System.out.println("222");
 
 
@@ -72,7 +31,8 @@ public class WenData {
 //        message.setBody(OnOpenMessage.builder().channel("echarts1").build());
 //        websocket.send(JSON.toJSONString(message));
         message.setBody(OnOpenMessage.builder().channel("echarts1").build());
-        websocket.send(JSON.toJSONString(message));
+        client.send(JSON.toJSONString(message));
+
 
 
     }
