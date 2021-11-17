@@ -49,7 +49,7 @@ public class EchartServers {
         ReturnMessage<List> message  = new ReturnMessage<>();
         message.setChannel(ChannelEnum.ECHARTS1.getValue());
         message.setBody(rearrayList);
-        aLong.addAndGet(10);
+        aLong.addAndGet(10) ;
         return message;
     }
 }
