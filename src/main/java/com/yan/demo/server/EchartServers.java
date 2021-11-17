@@ -1,6 +1,7 @@
 package com.yan.demo.server;
 
 import com.yan.demo.common.enums.ChannelEnum;
+import com.yan.demo.common.enums.CountValueEnum;
 import com.yan.demo.dao.excelDao.EchartsDao;
 import com.yan.demo.dao.excelDao.pojo.Disease;
 import com.yan.demo.wesockter.ReturnMessage;
@@ -43,7 +44,7 @@ public class EchartServers {
         collect.forEach((k,v)->{
             arrayList.add(new Echars1(k, v));
         });
-        List<Echars1> rearrayList= arrayList.stream().sorted(Comparator.comparing(Echars1::getCount).reversed()).collect(Collectors.toList());
+        List<Echars1> rearrayList= arrayList.stream().sorted(Comparator.comparing(Echars1::getCount).reversed()).collect(Collectors.toList()).subList(0,CountValueEnum.ECHARTS1_INTERCEPT.getValue());
 
         ReturnMessage<List> message = new ReturnMessage<>();
         message.setChannel(ChannelEnum.ECHARTS1.getValue());
