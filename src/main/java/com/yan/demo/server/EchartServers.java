@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  */
 @Service
 public class EchartServers {
-    AtomicLong aLong;
+    static AtomicLong aLong=new AtomicLong(0L);
 
     @Autowired
     EchartsDao echartsDao;
@@ -29,7 +29,7 @@ public class EchartServers {
      *返回原始数据
      */
     public ReturnMessage<List<Disease>> getData(){
-        List<Disease> staticData = echartsDao.getStaticData();
+        List<Disease> staticData = echartsDao.setStaticData();
         ReturnMessage<List<Disease>> returnMessage = new ReturnMessage<>();
         returnMessage.setBody(staticData);
         returnMessage.setChannel(ChannelEnum.DATA.getValue());
@@ -42,7 +42,7 @@ public class EchartServers {
 
         List<Echars1> arrayList = new ArrayList<>();
         collect.forEach((k,v)->{
-            arrayList.add(new Echars1(k, v));
+            arrayList.add(new Echars1(k, v+aLong.getAndIncrement()));
         });
         List<Echars1> rearrayList= arrayList.stream().sorted(Comparator.comparing(Echars1::getCount).reversed()).collect(Collectors.toList()).subList(0,CountValueEnum.ECHARTS1_INTERCEPT.getValue());
 

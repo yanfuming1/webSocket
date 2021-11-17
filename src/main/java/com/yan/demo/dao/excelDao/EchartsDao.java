@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * @author ：yanfuming
@@ -24,6 +27,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Slf4j
 public class EchartsDao {
 
+    static ReadWriteLock lock=new ReentrantReadWriteLock();
+    static Lock readLock=lock.readLock();
+    static Lock writeLock=lock.writeLock();
 
 
      static  String fileName;
@@ -38,7 +44,7 @@ public class EchartsDao {
     }
 
     @PostConstruct
-    public void getEchartsData() {
+    public void getEchartsData()  {
 
 
         Long start=System.currentTimeMillis();
@@ -47,12 +53,34 @@ public class EchartsDao {
         EasyExcel.read(fileName, Disease.class, new PageReadListener<Disease>(dataList -> {
             diseases.addAll(dataList);
         })).sheet().doRead();
+
+
+        /**
+         *使用并发集合  不加锁
+         */
+      //  writeLock.lock();
         diseaseList.clear();
+
+//        try {
+//            Thread.sleep(5000);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+
         diseaseList=diseases;
+     //   writeLock.unlock();
         log.error("读取CSV-----》耗时{}",System.currentTimeMillis()-start);
     }
 
     public List<Disease> getStaticData(){
-        return diseaseList;
+    //    readLock.lock();
+        List<Disease> data=diseaseList;
+     //   readLock.unlock();
+        return data;
+    }
+
+    public List<Disease> setStaticData(){
+        getEchartsData();
+        return getStaticData();
     }
 }

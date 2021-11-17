@@ -38,7 +38,8 @@ public class ReturnDataTask {
 
 
 
-    @Scheduled(cron = "0/1 * * * * ?")
+
+    @Scheduled(fixedRate = 100)
     public void send1(){
 
         ReturnMessage<List> echarts1 = echartServers.getEcharts1();
