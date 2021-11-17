@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author ：yanfuming
@@ -37,13 +38,11 @@ public class ReturnDataTask {
 
 
 
-//    @Scheduled(cron = "0/1 * * * * ?")
-//    public void send1(){
-//
-//        ReturnMessage<Echars1> message = new ReturnMessage<>();
-//        message.setChannel(ChannelEnum.ECHARTS1.getValue());
-//        message.setBody(Echars1.builder().data("测试").build());
-//        webSocketClient.sendMessage(message);
-//        log.info("定时任务开启 推动消息{}",message);
-//    }
+    @Scheduled(cron = "0/1 * * * * ?")
+    public void send1(){
+
+        ReturnMessage<List> echarts1 = echartServers.getEcharts1();
+        webSocketClient.sendMessage(echarts1);
+        log.info("定时任务开启 推动消息{}",echarts1);
+    }
 }

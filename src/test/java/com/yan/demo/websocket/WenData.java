@@ -71,7 +71,7 @@ public class WenData {
         message.setCode(1);
 //        message.setBody(OnOpenMessage.builder().channel("echarts1").build());
 //        websocket.send(JSON.toJSONString(message));
-        message.setBody(OnOpenMessage.builder().channel("data").build());
+        message.setBody(OnOpenMessage.builder().channel("echarts1").build());
         websocket.send(JSON.toJSONString(message));
 
 
