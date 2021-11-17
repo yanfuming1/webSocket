@@ -42,13 +42,14 @@ public class EchartServers {
 
         List<Echars1> arrayList = new ArrayList<>();
         collect.forEach((k,v)->{
-            arrayList.add(new Echars1(k, v+aLong.getAndIncrement()));
+            arrayList.add(new Echars1(k, v+aLong.get()));
         });
         List<Echars1> rearrayList= arrayList.stream().sorted(Comparator.comparing(Echars1::getCount).reversed()).collect(Collectors.toList()).subList(0,CountValueEnum.ECHARTS1_INTERCEPT.getValue());
 
         ReturnMessage<List> message = new ReturnMessage<>();
         message.setChannel(ChannelEnum.ECHARTS1.getValue());
         message.setBody(rearrayList);
+        aLong.addAndGet(10);
         return message;
     }
 }
