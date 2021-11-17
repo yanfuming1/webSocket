@@ -68,6 +68,7 @@ public abstract class Client {
                     super.onFailure(webSocket, throwable, response);
                     //连接失败...
                     log.error("连接失败--重试");
+
                 }
 
             });

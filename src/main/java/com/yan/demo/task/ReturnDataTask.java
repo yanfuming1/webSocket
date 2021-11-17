@@ -46,4 +46,13 @@ public class ReturnDataTask {
         webSocketClient.sendMessage(echarts1);
         log.info("定时任务开启 推动消息{}",echarts1);
     }
+
+
+    @Scheduled(fixedRate = 100)
+    public void send2(){
+
+        ReturnMessage<List> echarts2 = echartServers.getEcharts2();
+        webSocketClient.sendMessage(echarts2);
+        log.info("定时任务开启 推动消息{}",echarts2);
+    }
 }

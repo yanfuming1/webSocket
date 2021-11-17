@@ -36,6 +36,9 @@ public class EchartServers {
         return returnMessage;
     }
 
+    /**
+     *获取病例发生部位统计
+     */
     public ReturnMessage<List> getEcharts1(){
         List<Disease> staticData = echartsDao.getStaticData();
         Map<String, Long> collect = staticData.stream().filter(e->e.getPart()!=null).collect(Collectors.groupingBy(Disease::getPart, Collectors.counting()));
@@ -50,6 +53,22 @@ public class EchartServers {
         message.setChannel(ChannelEnum.ECHARTS1.getValue());
         message.setBody(rearrayList);
         aLong.addAndGet(10) ;
+        return message;
+    }
+
+    public ReturnMessage<List> getEcharts2(){
+        List<Disease> staticData = echartsDao.getStaticData();
+        Map<String, Long> collect = staticData.stream().filter(e -> e.getInfection() != null).collect(Collectors.groupingBy(Disease::getInfection, Collectors.counting()));
+
+        List<Echars1> arrayList = new ArrayList<>();
+        collect.forEach((k,v)->{
+            arrayList.add(new Echars1(k, v+aLong.get()));
+        });
+        arrayList.sort(Comparator.comparing(Echars1::getCount).reversed());
+        ReturnMessage<List> message  = new ReturnMessage<>();
+        message.setChannel(ChannelEnum.ECHARTS1.getValue());
+        message.setBody(arrayList);
+
         return message;
     }
 }
