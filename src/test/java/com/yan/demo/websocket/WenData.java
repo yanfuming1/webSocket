@@ -28,8 +28,8 @@ public class WenData {
 
         Message<OnOpenMessage> message = new Message<>();
         message.setCode(1);
-//        message.setBody(OnOpenMessage.builder().channel("echarts1").build());
-//        websocket.send(JSON.toJSONString(message));
+        message.setBody(OnOpenMessage.builder().channel("echarts2").build());
+        client.send(JSON.toJSONString(message));
         message.setBody(OnOpenMessage.builder().channel("echarts1").build());
         client.send(JSON.toJSONString(message));
 

@@ -73,7 +73,7 @@ public abstract class Client {
 
             });
             try {
-                Thread.sleep(1000);
+                Thread.sleep(10);
             }catch (Exception e){
                 e.printStackTrace();
             }
