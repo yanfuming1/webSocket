@@ -36,24 +36,22 @@ public class EchartsDao {
 
     static List<Disease> diseaseList = new CopyOnWriteArrayList<>();
 
-    public EchartsDao() throws IOException {
+    static {
         File directory = new File("");//参数为空
-        String courseFile = directory.getCanonicalPath();//标准的路径 ;
+      //  String courseFile = directory.getCanonicalPath();//标准的路径 ;
         String author = directory.getAbsolutePath();//绝对路径;
         fileName = author + "/src/main/resources/disease.csv";
     }
 
+
+
     @PostConstruct
     public void getEchartsData() {
-
-
         Long start = System.currentTimeMillis();
         ArrayList<Disease> diseases = new ArrayList<>();
-//        String fileName ="/Users/guanliyuan/Desktop/demo/src/main/java/com/yan/demo/dao/excelDao/disease.csv";
         EasyExcel.read(fileName, Disease.class, new PageReadListener<Disease>(dataList -> {
             diseases.addAll(dataList);
         })).sheet().doRead();
-
 
         /**
          *使用并发集合  不加锁
