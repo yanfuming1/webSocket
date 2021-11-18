@@ -31,6 +31,8 @@ public class WenData {
         message.setBody(OnOpenMessage.builder().channel("echarts2").build());
         client.send(JSON.toJSONString(message));
         message.setBody(OnOpenMessage.builder().channel("echarts1").build());
+        //client.send(JSON.toJSONString(message));
+        message.setBody(OnOpenMessage.builder().channel("echarts2").build());
         client.send(JSON.toJSONString(message));
 
 

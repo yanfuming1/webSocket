@@ -39,7 +39,7 @@ public class ReturnDataTask {
 
 
 
-    @Scheduled(fixedRate = 10)
+    @Scheduled(fixedRate = 100)
     public void send1(){
 
         ReturnMessage<List> echarts1 = echartServers.getEcharts1();
@@ -48,7 +48,7 @@ public class ReturnDataTask {
     }
 
 
-    @Scheduled(fixedRate = 10)
+    @Scheduled(fixedRate = 100)
     public void send2(){
 
         ReturnMessage<List> echarts2 = echartServers.getEcharts2();

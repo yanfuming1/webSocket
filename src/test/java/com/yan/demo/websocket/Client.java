@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import okio.ByteString;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -16,16 +18,32 @@ public abstract class Client {
 
     static WebSocket websocket;
     static boolean onOpen=false;
+     long data=System.currentTimeMillis();
 
-    public Client() {
+
+
+   {
         onWebSocket();
+       /**
+        *开一个线程，3秒监控一次
+        */
+       ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+       service.scheduleAtFixedRate(()->{
+           if((System.currentTimeMillis()-this.data)/100>30){
+               onWebSocket();
+               System.gc();
+
+           }
+
+       }, 3, 3, TimeUnit.SECONDS);
     }
 
-    public void onWebSocket(){
+
+    public  void  onWebSocket(){
         OkHttpClient mClient = new OkHttpClient.Builder()
-                .readTimeout(3, TimeUnit.SECONDS)//设置读取超时时间
-                .writeTimeout(3, TimeUnit.SECONDS)//设置写的超时时间
-                .connectTimeout(3, TimeUnit.SECONDS)//设置连接超时时间
+                .readTimeout(2, TimeUnit.SECONDS)//设置读取超时时间
+                .writeTimeout(2, TimeUnit.SECONDS)//设置写的超时时间
+                .connectTimeout(2, TimeUnit.SECONDS)//设置连接超时时间
                 .build();
         //连接地址
         String url = "ws://127.0.0.1:9000/webSocket";
@@ -34,7 +52,7 @@ public abstract class Client {
 
         //开始连接
         WebSocket web = null;
-        while (!onOpen||web == null) {
+     //   while (!onOpen||web == null) {
             web = mClient.newWebSocket(request, new WebSocketListener() {
                 @Override
                 public void onOpen(WebSocket webSocket, Response response) {
@@ -48,6 +66,7 @@ public abstract class Client {
                 public void onMessage(WebSocket webSocket, String text) {
                     handle(text);
                     super.onMessage(webSocket, text);
+                    data=System.currentTimeMillis();
                     //收到消息...（一般是这里处理json）
                 }
 
@@ -69,17 +88,20 @@ public abstract class Client {
                     //连接失败...
                     log.error("连接失败--重试");
 
+                    onOpen=false;
+
                 }
 
             });
-            try {
-                Thread.sleep(10);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-
-        }
+//            try {
+//                Thread.sleep(1000);
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
+//
+//        }
         websocket=web;
+
     }
 
     public void send(String val){
