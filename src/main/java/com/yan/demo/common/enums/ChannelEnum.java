@@ -13,9 +13,9 @@ import lombok.Data;
 public enum ChannelEnum implements Enum2ArgGeneral<String,String > {
     ECHARTS1("echarts1","第一个图"),
     ECHARTS2("echarts2","第二个图"),
-    ECHARTS3("echarts3","第二个图"),
-    ECHARTS4("echarts4","第二个图"),
-    ECHARTS5("echarts5","第二个图"),
+    ECHARTS3("echarts3","第三个图"),
+    ECHARTS4("echarts4","第四个图"),
+    ECHARTS5("echarts5","第五个图"),
 
     DATA("data","原始数据")
     ;
