@@ -13,7 +13,13 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum CountValueEnum implements Enum2ArgGeneral<Integer,String> {
-    ECHARTS1_INTERCEPT(5,"截取数量"),
+    ECHARTS1_INTERCEPT(5,"echarts1截取数量"),
+    ECHARTS2_INTERCEPT(5,"echarts2截取数量"),
+    ECHARTS3_INTERCEPT(5,"echarts3截取数量"),
+    ECHARTS4_INTERCEPT(2,"echarts4截取数量"),
+    ECHARTS5_INTERCEPT(5,"echarts5截取数量"),
+    ECHARTS6_INTERCEPT(5,"echarts6截取数量"),
+    ECHARTS7_INTERCEPT(5,"echarts7截取数量"),
     ;
     Integer value;
     String Content;

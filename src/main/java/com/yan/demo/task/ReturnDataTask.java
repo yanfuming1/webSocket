@@ -42,17 +42,38 @@ public class ReturnDataTask {
     @Scheduled(fixedRate = 100)
     public void send1(){
 
-        ReturnMessage<List> echarts1 = echartServers.getEcharts1();
+        ReturnMessage<List<Echars1>> echarts1 = echartServers.getEcharts1();
         webSocketClient.sendMessage(echarts1);
-        log.info("定时任务开启 推动消息{}",echarts1);
+       // log.info("定时任务开启 推动消息{}",echarts1);
     }
 
 
     @Scheduled(fixedRate = 100)
     public void send2(){
 
-        ReturnMessage<List> echarts2 = echartServers.getEcharts2();
+        ReturnMessage<List<Echars1>> echarts2 = echartServers.getEcharts2();
         webSocketClient.sendMessage(echarts2);
-        log.info("定时任务开启 推动消息{}",echarts2);
+       // log.info("定时任务开启 推动消息{}",echarts2);
+    }
+
+
+    @Scheduled(fixedRate = 100)
+    public void send3(){
+
+        ReturnMessage<List<Echars1>> echarts2 = echartServers.getEcharts3();
+        webSocketClient.sendMessage(echarts2);
+      //  log.info("定时任务开启 推动消息{}",echarts2);
+    }
+
+    @Scheduled(fixedRate = 100)
+    public void send4(){
+        ReturnMessage<List<Echars1>> echarts2 = echartServers.getEcharts4();
+        webSocketClient.sendMessage(echarts2);
+    }
+
+    @Scheduled(fixedRate = 100)
+    public void send5(){
+        ReturnMessage<List<Echars1>> echarts2 = echartServers.getEcharts5();
+        webSocketClient.sendMessage(echarts2);
     }
 }
