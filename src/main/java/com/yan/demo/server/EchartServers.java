@@ -58,7 +58,7 @@ public class EchartServers {
 
         Random random = new Random();
         int i = random.nextInt(100);
-        aLong.addAndGet(i-40) ;
+        aLong.addAndGet(i-50) ;
         return message;
     }
 
