@@ -46,7 +46,7 @@ public abstract class Client {
                 .connectTimeout(2, TimeUnit.SECONDS)//设置连接超时时间
                 .build();
         //连接地址
-        String url = "ws://106.52.174.153:9001/webSocket";
+        String url = "ws://182.92.72.202:9001/webSocket";
         //构建一个连接请求对象
         Request request = new Request.Builder().get().url(url).build();
 

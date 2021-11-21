@@ -16,6 +16,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Echars1 extends EcharsBase{
-    String value;
-    Long count;
+    String name;
+    Long value;
 }

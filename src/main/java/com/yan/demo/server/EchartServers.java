@@ -50,7 +50,7 @@ public class EchartServers {
         collect.forEach((k,v)->{
             arrayList.add(new Echars1(k, v+aLong.get()));
         });
-        List<Echars1> rearrayList= arrayList.stream().sorted(Comparator.comparing(Echars1::getCount).reversed()).collect(Collectors.toList()).subList(0,CountValueEnum.ECHARTS1_INTERCEPT.getValue());
+        List<Echars1> rearrayList= arrayList.stream().sorted(Comparator.comparing(Echars1::getValue).reversed()).collect(Collectors.toList()).subList(0,CountValueEnum.ECHARTS1_INTERCEPT.getValue());
 
         ReturnMessage<List<Echars1>> message  = new ReturnMessage<>();
         message.setChannel(ChannelEnum.ECHARTS1.getValue());
@@ -70,7 +70,7 @@ public class EchartServers {
         collect.forEach((k,v)->{
             arrayList.add(new Echars1(k, v+aLong.get()));
         });
-        List<Echars1> rearrayList= arrayList.stream().sorted(Comparator.comparing(Echars1::getCount).reversed()).collect(Collectors.toList());
+        List<Echars1> rearrayList= arrayList.stream().sorted(Comparator.comparing(Echars1::getValue).reversed()).collect(Collectors.toList());
         ReturnMessage<List<Echars1>> message  = new ReturnMessage<>();
         message.setChannel(ChannelEnum.ECHARTS2.getValue());
         message.setBody(rearrayList.subList(0,CountValueEnum.ECHARTS2_INTERCEPT.getValue()));
@@ -96,7 +96,7 @@ public class EchartServers {
         collect.forEach((k,v)->{
             arrayList.add(new Echars1(k, v+aLong.get()));
         });
-        arrayList.sort((a,b)-> -a.getCount().compareTo(b.getCount()));
+        arrayList.sort((a,b)-> -a.getValue().compareTo(b.getValue()));
         return value(arrayList,ChannelEnum.ECHARTS3,CountValueEnum.ECHARTS3_INTERCEPT);
     }
 
@@ -139,7 +139,7 @@ public class EchartServers {
             arrayList.add(new Echars1(k, v+aLong.get()));
         });
 
-        List<Echars1> reArrayList= arrayList.stream().sorted(Comparator.comparing(Echars1::getCount).reversed()).collect(Collectors.toList());
+        List<Echars1> reArrayList= arrayList.stream().sorted(Comparator.comparing(Echars1::getValue).reversed()).collect(Collectors.toList());
         return reArrayList;
     }
 }
