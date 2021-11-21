@@ -55,7 +55,10 @@ public class EchartServers {
         ReturnMessage<List<Echars1>> message  = new ReturnMessage<>();
         message.setChannel(ChannelEnum.ECHARTS1.getValue());
         message.setBody(rearrayList);
-        aLong.addAndGet(1) ;
+
+        Random random = new Random();
+        int i = random.nextInt(100);
+        aLong.addAndGet(i-40) ;
         return message;
     }
 
