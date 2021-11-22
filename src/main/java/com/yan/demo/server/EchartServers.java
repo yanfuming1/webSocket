@@ -59,7 +59,7 @@ public class EchartServers {
         Random random = new Random();
         aLong.set(0);
         int i = random.nextInt(1000);
-        aLong.addAndGet(i-500) ;
+        aLong.addAndGet(i) ;
         return message;
     }
 
