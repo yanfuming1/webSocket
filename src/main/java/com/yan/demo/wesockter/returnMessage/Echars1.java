@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * @author ：yanfuming
  * @description：TODO
@@ -15,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Echars1 extends EcharsBase{
+public class Echars1 extends EcharsBase implements Serializable {
     String name;
     Long value;
 }
