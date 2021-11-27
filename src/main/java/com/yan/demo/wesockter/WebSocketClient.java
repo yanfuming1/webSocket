@@ -87,7 +87,7 @@ public class WebSocketClient {
      */
     public  void sendMessage(ReturnMessage message){
         String channel=message.getChannel();
-        log.info("推送{}频道",message.getChannel());
+       // log.info("推送{}频道",message.getChannel());
         if(channels.get(channel)==null){
          //   log.warn("{}频道无人订阅",channel);
             return;
