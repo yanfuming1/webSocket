@@ -41,12 +41,15 @@ public class EchartsDao {
       //  String courseFile = directory.getCanonicalPath();//标准的路径 ;
         String author = directory.getAbsolutePath();//绝对路径;
         fileName = author + "/src/main/resources/disease.csv";
+
     }
 
 
 
     @PostConstruct
     public void getEchartsData() {
+        System.out.println("===================>");
+        log.info("路径{}",fileName);
         Long start = System.currentTimeMillis();
         ArrayList<Disease> diseases = new ArrayList<>();
         EasyExcel.read(fileName, Disease.class, new PageReadListener<Disease>(dataList -> {
